@@ -1,0 +1,82 @@
+<div class="card card-body shadow col-md-4 offset-md-4 my-5">
+  <h3 class="text-center">Add Employee</h3>
+  <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+    <div class="mb-3">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter name"
+        [(ngModel)]="employee.name"
+        name="name"
+        required
+        minlength="3"
+        maxlength="20"
+        #name="ngModel"
+        autocomplete="off"
+      />
+      <div class="text-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors?.['required']">
+          Name is required.
+        </div>
+        <div *ngIf="name.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+        <div *ngIf="name.errors?.['maxlength']">
+          Name must be less than 20 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="lastname">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter last name"
+        [(ngModel)]="employee.lastname"
+        name="lastname"
+        required
+        minlength="3"
+        maxlength="30"
+        #lastname="ngModel"
+        autocomplete="off"
+      />
+      <div class="text-danger" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+        <div *ngIf="lastname.errors?.['required']">
+          Last name is required.
+        </div>
+        <div *ngIf="lastname.errors?.['minlength']">
+          Last name must be at least 3 characters long.
+        </div>
+        <div *ngIf="lastname.errors?.['maxlength']">
+          Last name must be less than 30 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Enter email"
+        [(ngModel)]="employee.email"
+        name="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+        required
+        #email="ngModel"
+      />
+      <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors?.['required']">
+          Email is required.
+        </div>
+        <div *ngIf="email.errors?.['pattern']">
+          Email must be a valid email address. for example example@gmail.com
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary w-100 fw-bold" [disabled]="!employeeForm.form.valid">Save</button>
+  </form>
+</div>
